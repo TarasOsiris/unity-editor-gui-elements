@@ -6,7 +6,7 @@ namespace Leskiv.EditorGuiElements
     {
         [MenuItem("Editor Gui Elements/Open Demo Window")] static void OpenWindow()
         {
-            GetWindow<DemoEditorWindow>();
+            GetWindow<DemoEditorWindow>().Show();
         }
 
         void OnGUI()
