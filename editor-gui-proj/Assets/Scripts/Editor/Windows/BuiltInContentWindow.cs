@@ -77,7 +77,10 @@ namespace Leskiv.EditorGuiElements
             EditorGUILayout.BeginHorizontal(BuiltInStyles.title);
             EditorGUILayout.LabelField("OL title");
             EditorGUILayout.EndHorizontal();
-            EditorGUILayout.BeginHorizontal(BuiltInStyles.box);
+
+            EditorGUILayout.Space();
+
+            EditorGUILayout.BeginHorizontal(BuiltInStyles.box, GUILayout.MaxHeight(16f));
             EditorGUILayout.LabelField("OL Box");
             EditorGUILayout.EndHorizontal();
         }
