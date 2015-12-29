@@ -22,6 +22,7 @@ namespace Leskiv.EditorGuiElements
         [MenuItem("Editor Gui Elements/EditorGuiLayout")] static void OpenWindow()
         {
             GetWindow<EditorGuiLayoutWindow>().Show();
+            GetWindow<EditorGuiLayoutWindow>().titleContent = new GUIContent("Default Controls");
         }
 
         void OnGUI()
