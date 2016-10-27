@@ -14,9 +14,20 @@ namespace Leskiv.EditorGuiElements
 
         void OnGUI()
         {
-            var rect = EditorGUILayout.GetControlRect();
-//            GUI.DrawTexture(rect, Texture2D.whiteTexture);
-            value = CusomGuiElements.MyCustomSlider(rect, value, GUI.skin.window);
+            var rect1 = EditorGUILayout.GetControlRect();
+            value = CustomSlider.MyCustomSlider(rect1, value, EditorStyles.miniButtonMid);
+            value = CustomSlider.MyCustomSlider(value, EditorStyles.miniButtonMid, GUILayout.Height(55));
+
+            var rect2 = EditorGUILayout.GetControlRect();
+            if (FlashingButton.DrawFlashingButton(rect2, new GUIContent("Hello", "Flashing button"), EditorStyles.miniTextField))
+            {
+//                Debug.Log("Click");
+            }
+        }
+
+        void OnInspectorUpdate()
+        {
+            Repaint();
         }
     }
 }

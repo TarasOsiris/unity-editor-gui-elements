@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
-public static class CusomGuiElements
+public static class CustomSlider
 {
     public static float MyCustomSlider(Rect controlRect, float value, GUIStyle style)
     {
@@ -22,7 +23,8 @@ public static class CusomGuiElements
                     GUI.color = Color.Lerp(Color.red, Color.green, value);
 
                     // Draw the texture from the GUIStyle, applying the tint
-                    GUI.DrawTexture(targetRect, Texture2D.whiteTexture);
+//                    GUI.DrawTexture(targetRect, Texture2D.whiteTexture);
+                    style.Draw(targetRect, new GUIContent(), controlID);
 
                     // Reset the tint back to white, i.e. untinted
                     GUI.color = Color.white;
@@ -54,8 +56,6 @@ public static class CusomGuiElements
 
         }
 
-
-
         if (Event.current.isMouse && GUIUtility.hotControl == controlID)
         {
 
@@ -75,5 +75,26 @@ public static class CusomGuiElements
 
 
         return value;
+    }
+
+    public static float MyCustomSlider(float value, GUIStyle style, params GUILayoutOption[] opts)
+    {
+        Rect position = GUILayoutUtility.GetRect(GUIContent.none, style, opts);
+        return MyCustomSlider(position, value, style);
+    }
+
+    public static void MyCustomSlider(Rect controlRect, SerializedProperty prop, GUIStyle style, GUIContent label)
+    {
+        label = EditorGUI.BeginProperty(controlRect, label, prop);
+        controlRect = EditorGUI.PrefixLabel(controlRect, label);
+
+        // Use our previous definition of MyCustomSlider, which we’ve updated to do something
+        // sensible if EditorGUI.showMixedValue is true
+        EditorGUI.BeginChangeCheck();
+        float newValue = MyCustomSlider(controlRect, prop.floatValue, style);
+        if (EditorGUI.EndChangeCheck())
+            prop.floatValue = newValue;
+
+        EditorGUI.EndProperty();
     }
 }
